@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container py-5">
+    <h2 class="text-center mb-4">💰 Expense Tracker</h2>
+    
+    <!-- Form -->
+    <div class="card shadow p-3 mb-4">
+      <form id="expenseForm" class="row g-3">
+        <div class="col-md-4">
+          <input type="number" id="amount" class="form-control" placeholder="Amount (₹)" required>
+        </div>
+        <div class="col-md-4">
+          <input type="text" id="category" class="form-control" placeholder="Category" required>
+        </div>
+        <div class="col-md-4">
+          <input type="text" id="description" class="form-control" placeholder="Description">
+        </div>
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-success">Add Expense</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Expenses Table -->
+    <div class="card shadow p-3">
+      <h5 class="mb-3">Expenses</h5>
+      <table class="table table-bordered text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>Amount (₹)</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="expenseTable"></tbody>
+      </table>
+      <h5 class="text-end">Total: ₹ <span id="total">0</span></h5>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const expenseForm = document.getElementById("expenseForm");
+    const expenseTable = document.getElementById("expenseTable");
+    const totalDisplay = document.getElementById("total");
+
+    let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+
+    function renderExpenses() {
+      expenseTable.innerHTML = "";
+      let total = 0;
+      expenses.forEach((expense, index) => {
+        total += expense.amount;
+        expenseTable.innerHTML += `
+          <tr>
+            <td>₹${expense.amount}</td>
+            <td>${expense.category}</td>
+            <td>${expense.description}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="deleteExpense(${index})">Delete</button></td>
+          </tr>
+        `;
+      });
+      totalDisplay.textContent = total;
+      localStorage.setItem("expenses", JSON.stringify(expenses));
+    }
+
+    expenseForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const amount = parseFloat(document.getElementById("amount").value);
+      const category = document.getElementById("category").value;
+      const description = document.getElementById("description").value;
+
+      expenses.push({ amount, category, description });
+      renderExpenses();
+      expenseForm.reset();
+    });
+
+    function deleteExpense(index) {
+      expenses.splice(index, 1);
+      renderExpenses();
+    }
+
+    // Initial render
+    renderExpenses();
+  </script>
+
+</body>
+</html>
