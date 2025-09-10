@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Admin Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-200 min-h-screen">
+    <!-- Header -->
+    <div class="text-center bg-green-600 text-white py-4">
+      <h1 class="text-2xl font-bold">Seller Admin Page</h1>
+    </div>
+
+    <!-- Card -->
+    <div class="max-w-4xl mx-auto mt-6 bg-white shadow rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4">Add / Edit Products</h2>
+
+      <form id="formHandling" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Product Name -->
+        <div>
+          <input
+            type="text"
+            placeholder="Product Name"
+            id="product"
+            class="w-full p-2 border rounded focus:ring-2 focus:ring-green-500 focus:outline-none"
+          />
+        </div>
+
+        <!-- Amount -->
+        <div>
+          <input
+            type="number"
+            placeholder="Amount"
+            id="amount"
+            class="w-full p-2 border rounded focus:ring-2 focus:ring-green-500 focus:outline-none"
+          />
+        </div>
+
+        <!-- Description -->
+        <div>
+          <input
+            type="text"
+            placeholder="Category"
+            id="Category"
+            class="w-full p-2 border rounded focus:ring-2 focus:ring-green-500 focus:outline-none"
+          />
+        </div>
+
+        <!-- Button -->
+        <div class="col-span-1 md:col-span-3 text-center">
+          <button
+            type="submit"
+            class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition"
+          >
+            Save Product
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Product List Table -->
+    <div class="max-w-4xl mx-auto mt-6 bg-white shadow rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4">Product List</h2>
+
+      <div class="overflow-x-auto">
+        <table
+          id="tableHandling"
+          class="w-full border border-gray-300 text-center"
+        >
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="border px-4 py-2">Product Name</th>
+              <th class="border px-4 py-2">Amount</th>
+              <th class="border px-4 py-2">Description</th>
+              <th class="border px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- JS will dynamically add rows here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
